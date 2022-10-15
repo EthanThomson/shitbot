@@ -1,0 +1,3 @@
+using BCM pin numbers (gpio numbers)
+2 ->
+3 ->
