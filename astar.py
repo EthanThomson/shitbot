@@ -31,8 +31,8 @@ def process(cas):
             black_my = y + h / 2
             black_list = (black_mx, black_my)
             black_coords.append(black_list)
-            # cv2.circle(imageFrame, (int(black_mx), int(black_my)), 1, (255, 255, 255), 3)
-            # cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
+            cv2.circle(imageFrame, (int(black_mx), int(black_my)), 1, (255, 255, 255), 3)
+            cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
 
     # Yellow
     y_lower = np.array([21, 100, 120], np.uint8)
@@ -50,8 +50,8 @@ def process(cas):
             yellow_my = y + h / 2
             yellow_list = (yellow_mx, yellow_my)
             yellow_coords.append(yellow_list)
-            # cv2.circle(imageFrame, (int(yellow_mx), int(yellow_my)), 1, (255, 255, 255), 3)
-            # cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
+            cv2.circle(imageFrame, (int(yellow_mx), int(yellow_my)), 1, (255, 255, 255), 3)
+            cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
 
     # Red
     r_lower = np.array([0, 5, 0], np.uint8)
@@ -69,8 +69,8 @@ def process(cas):
             red_my = y + h / 2
             red_list = (red_mx, red_my)
             red_coords.append(red_list)
-            # cv2.circle(imageFrame, (int(red_mx), int(red_my)), 1, (255, 255, 255), 3)
-            # cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
+            cv2.circle(imageFrame, (int(red_mx), int(red_my)), 1, (255, 255, 255), 3)
+            cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
 
     # Blue
     bu_lower = np.array([90, 60, 0], np.uint8)
@@ -88,8 +88,8 @@ def process(cas):
             blue_my = y + h / 2
             blue_list = (blue_mx, blue_my)
             blue_coords.append(blue_list)
-            # cv2.circle(imageFrame, (int(blue_mx), int(blue_my)), 1, (255, 255, 255), 3)
-            # cv2.imshow("Multiple Color Detection in Real-TIme", imageFrame)
+            cv2.circle(imageFrame, (int(blue_mx), int(blue_my)), 1, (255, 255, 255), 3)
+            cv2.imwrite(r"C:\Users\ch303\PycharmProjects\pythonProject\a.png", imageFrame)
 
     return (yellow_coords, blue_coords, red_coords, black_coords)
 
@@ -224,11 +224,7 @@ def obs(yela, blu, re, blak, all, maze, start):
         coord.append(coords(all[3]))
 
     dist = np.array(dist, dtype=object)
-    print(dist)
-    print(len(dist))
-    print(len(dist[0]))
     coord = np.array(coord, dtype=object)
-    print(len(coord))
     point = closest(dist, coord)
     return (maze)
 
@@ -236,23 +232,27 @@ def obs(yela, blu, re, blak, all, maze, start):
 def closest(dist, coord):
     position = []
     mind = []
-    k = []
+    coords = []
     for x in range(len(dist)):
         mindist = min(dist[x])
         for y in range(len(dist[x])):
-            print(dist[x][y])
             check = (mindist == dist[x][y])
             if check == 1:
                 position.append(y)
                 mind.append(mindist)
                 break
-    k.append(coord[0][position[0]])
-    k.append(coord[1][position[1]])
-    for x in range(len(mind))
-        fmind = min(mindist)
-
-    print(mind)
-    return
+    for x in range(len(position)):
+        coords.append(coord[x][position[x]])
+    fdist = min(mind)
+    for x in range(len(mind)):
+        check = (fdist == mind[x])
+        if check == 1:
+            a = x
+            break
+    fcoord = coords[a]
+    print(fcoord)
+    print(fdist)
+    return fcoord, fdist
 
 # def obst(input, maze):
 #     for x in range(len(input)):
@@ -289,7 +289,9 @@ def coords(input):
     coord = []
     for x in range(len(input)):
         xin = input[x][0]
+        xin = xin/10
         yin = input[x][1]
+        yin = yin/10
         coords = (xin, yin)
         coord.append(coords)
     return coord
@@ -348,7 +350,7 @@ def coords(input):
 
 def main():
     stime = time.perf_counter()
-    start = (0, 0)
+    start = (700, 0)
     all = process(0)
     maze = np.zeros((80, 121))
     # dist = distance(0,0,1,0,all, start)
