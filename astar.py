@@ -248,6 +248,9 @@ def closest(dist, coord):
                 break
     k.append(coord[0][position[0]])
     k.append(coord[1][position[1]])
+    for x in range(len(mind))
+        fmind = min(mindist)
+
     print(mind)
     return
 
